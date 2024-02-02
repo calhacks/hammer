@@ -1,0 +1,356 @@
+@import 'constants';
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: $body-font;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+body {
+  color: $text-color;
+  background-color: $light;
+}
+
+div {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
+  margin: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-family: $heading-font;
+  font-weight: bold;
+}
+
+p {
+  padding-bottom: 0.25rem;
+}
+
+.preserve-formatting {
+  white-space: pre-wrap;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  margin: 0;
+}
+
+input,
+textarea {
+  font-family: $body-font;
+}
+
+input {
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
+}
+
+table,
+tr,
+td,
+th {
+  border: 0.1rem solid black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  padding: 0 0.25rem;
+}
+
+th {
+  background: $light-grey;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+th.sort-header {
+  cursor: pointer;
+  &::selection {
+    background:transparent;
+  }
+}
+
+table th.sort-header::after {
+  content: " ( )";
+  visibility: hidden;
+  font-family: "Source Code Pro", "Courier New", monospace;
+  opacity: 0.5;
+}
+
+table th.sort-header:hover::after {
+  visibility: visible;
+}
+
+table th.sort-up::after {
+  content: " (+)";
+  visibility: visible;
+}
+
+table th.sort-down::after {
+  content: " (-)";
+  visibility: visible;
+}
+
+textarea,
+input[type=text] {
+  font-weight: normal;
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+a.colored {
+  color: $link-color;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+
+hr {
+  position: relative;
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+}
+
+.item {
+  padding-bottom: 1rem;
+}
+
+.info {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.api-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  a {
+    color: $link-color;
+  }
+}
+
+.compact {
+  padding: 0 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.banner {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: $light;
+  background-color: $dark;
+}
+
+.banner-tight {
+  @extend .banner;
+  margin-bottom: 0;
+}
+
+#admin-header {
+  background-color: $admin-color;
+}
+
+#wait-header {
+  background-color: $wait-color;
+  color: $dark;
+}
+
+#error-header {
+  background-color: $error-color;
+}
+
+#previous-header {
+  background-color: $previous-color;
+}
+
+#previous-body {
+  background-color: mix($previous-color, white, 25%);
+}
+
+#current-header {
+  background-color: $current-color;
+}
+
+#current-body {
+  background-color: mix($current-color, white, 25%);
+}
+
+#vote-header {
+  background-color: $vote-color;
+}
+
+input[type=submit] {
+  color: $light;
+  background-color: $dark;
+  border: 2px solid $dark;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  height: 3rem;
+  -webkit-border-radius: 0; // fix rounded buttons on iOS
+  td & {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.button-left {
+  float: left;
+  width: 48%;
+}
+
+.button-right {
+  float: right;
+  width: 48%;
+}
+
+.button-full {
+  width: 100%;
+}
+
+.button-gap {
+  margin-top: 0.75rem;
+}
+
+#vote-previous {
+  background-color: $previous-color;
+  border: 3px solid $previous-color;
+}
+
+#vote-current {
+  background-color: $current-color;
+  border: 3px solid $current-color;
+}
+
+#vote-continue {
+  background-color: $current-color;
+  border: 3px solid $current-color;
+}
+
+#vote-skip {
+  background-color: $vote-skip-color;
+  border: 3px solid $vote-skip-color;
+}
+
+#vote-submit {
+  background-color: $vote-submit-color;
+}
+
+#vote-submit:disabled {
+  background-color: $light-grey;
+  border: none;
+}
+
+.radio-button {
+  display: inline-block;
+}
+
+.radio-button > input {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-button > label {
+  display: inline-block;
+  padding: 10px 20px;
+  width: 100%;
+  color: $light;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.radio-button > input:not(:checked) + label {
+  background-color: white;
+  color: $dark;
+}
+
+input[type=submit].positive {
+  background-color: $positive-color;
+}
+
+input[type=submit].negative {
+  background-color: $negative-color;
+}
+
+input[type=submit].neutral {
+  background-color: $neutral-color;
+  color: $dark;
+}
+
+.disabled {
+  background-color: $disabled-color;
+}
+
+.prioritized {
+  background-color: $prioritized-color;
+}
+
+.upload-container {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.field {
+    padding-right: 1rem;
+}
+
+#footer {
+  margin-top: 2rem;
+  border-top: 1px solid $light-grey;
+  p {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
