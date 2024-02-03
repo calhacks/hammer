@@ -19,7 +19,8 @@ def requires_open(redirect_to):
     def decorator(f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            if Setting.value_of(SETTING_CLOSED) == SETTING_TRUE:
+            annotator = get_current_annotator()
+            if Setting.value_of(SETTING_WAVE) != annotator.wave:
                 return redirect(url_for(redirect_to))
             else:
                 return f(*args, **kwargs)
@@ -48,7 +49,7 @@ def index():
             content=utils.render_markdown(settings.LOGGED_OUT_MESSAGE)
         )
     else:
-        if Setting.value_of(SETTING_CLOSED) == SETTING_TRUE:
+        if Setting.value_of(SETTING_WAVE) != annotator.wave:
             return render_template(
                 'closed.html',
                 content=utils.render_markdown(settings.CLOSED_MESSAGE)
@@ -72,8 +73,8 @@ def index():
             return render_template('vote.html', prev=annotator.prev, next=annotator.next)
 
 @app.route('/vote', methods=['POST'])
-@requires_open(redirect_to='index')
 @requires_active_annotator(redirect_to='index')
+@requires_open(redirect_to='index')
 def vote():
     def tx():
         annotator = get_current_annotator()
@@ -99,8 +100,8 @@ def vote():
     return redirect(url_for('index'))
 
 @app.route('/begin', methods=['POST'])
-@requires_open(redirect_to='index')
 @requires_active_annotator(redirect_to='index')
+@requires_open(redirect_to='index')
 def begin():
     def tx():
         annotator = get_current_annotator()
@@ -132,8 +133,8 @@ def login(secret):
     return redirect(url_for('index'))
 
 @app.route('/welcome/')
-@requires_open(redirect_to='index')
 @requires_active_annotator(redirect_to='index')
+@requires_open(redirect_to='index')
 def welcome():
     return render_template(
         'welcome.html',
@@ -141,8 +142,8 @@ def welcome():
     )
 
 @app.route('/welcome/done', methods=['POST'])
-@requires_open(redirect_to='index')
 @requires_active_annotator(redirect_to='index')
+@requires_open(redirect_to='index')
 def welcome_done():
     def tx():
         annotator = get_current_annotator()

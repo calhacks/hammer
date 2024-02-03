@@ -5,7 +5,7 @@ SENDGRID_URL = "https://api.sendgrid.com/v3/mail/send"
 
 # Setting
 # keys
-SETTING_CLOSED = 'closed' # boolean
+SETTING_WAVE = '0' # boolean
 SETTING_TELEMETRY_LAST_SENT = 'telemetry_sent_time' # integer
 # values
 SETTING_TRUE = 'true'

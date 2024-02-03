@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
 
     su postgres -c "createdb hammer 2>/dev/null || true"
 
-    su postgres -c "createuser hammer 2>/dev/null || true"
+    su postgres -c "createuser vagrant 2>/dev/null || true"
   EOS
 
 end

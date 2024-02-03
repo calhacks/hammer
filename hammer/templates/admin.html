@@ -25,6 +25,7 @@
       <thead>
         <tr>
           <th data-sort-method="number">Id</th>
+          <th data-sort-method="caseInsensitiveSort">Wave</th>
           <th data-sort-method="caseInsensitiveSort">Name</th>
           <th data-sort-method="caseInsensitiveSort">Location</th>
           <th data-sort-method="caseInsensitiveSort">Description</th>
@@ -42,6 +43,7 @@
         {% for item in items %}
         <tr class="{{ 'disabled' if not item.active else 'prioritized' if item.prioritized else '' }}">
           <td><a href="{{ url_for('item_detail', item_id=item.id) }}" class="colored">{{ item.id }}</a></td>
+          <td>{{ item.wave }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.location }}</td>
           <td class="preserve-formatting">{{ item.description }}</td>
@@ -90,6 +92,7 @@
       <thead>
         <tr>
           <th class="sort-default" data-sort-method="number">Id</th>
+          <th data-sort-method="caseInsensitiveSort">Wave</th>
           <th data-sort-method="caseInsensitiveSort">Name</th>
           <th data-sort-method="caseInsensitiveSort">Email</th>
           <th data-sort-method="caseInsensitiveSort">Description</th>
@@ -106,6 +109,7 @@
         {% for annotator in annotators %}
         <tr class="{{ 'disabled' if not annotator.active else '' }}">
           <td><a href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}" class="colored">{{ annotator.id }}</a></td>
+          <td>{{ annotator.wave }}</td>
           <td>{{ annotator.name }}</td>
           <td>{{ annotator.email }}</td>
           <td>{{ annotator.description }}</td>
@@ -149,7 +153,7 @@
     <h2>Add Projects</h2>
   </div>
   <div class="info">
-    <p>Add name, location, description (CSV format)</p>
+    <p>Add name, wave, location, description (CSV format)</p>
     <textarea name="data" form="item_form"></textarea>
     <form action="{{ url_for('item') }}" method="post" id="item_form" enctype="multipart/form-data">
       <div class="upload-container">
@@ -163,10 +167,10 @@
 </div>
 <div class="item">
   <div class="banner">
-    <h2>Add Judges</h2>
+    <h2>Add Peer Judges</h2>
   </div>
   <div class="info">
-    <p>Add name, email, description (CSV format)</p>
+    <p>Add name, wave, email, description (CSV format)</p>
     <textarea name="data" form="annotator_form"></textarea>
     <form action="{{ url_for('annotator') }}" method="post" id="annotator_form" enctype="multipart/form-data">
       <div class="upload-container">
@@ -193,13 +197,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="{{ 'disabled' if setting_closed else '' }}">
-          <td>Closed</td>
-          <td>{{ 'Closed' if setting_closed else 'Open' }}</td>
+        <tr>
+          <td>Wave (0 is considered <b>closed</b>)</td>
+          <td>{{ setting_wave }}</td>
           <td class="compact">
             <form action="{{ url_for('setting') }}" method="post">
-              <input type="submit" name="action" value="{{ 'Open' if setting_closed else 'Close' }}" class="{{ 'positive' if setting_closed else 'negative' }}">
-              <input type="hidden" name="key" value="closed">
+              <input name="value" style="width: 100%;" value="{{ setting_wave }}">
+              <input type="hidden" name="key" value="wave">
               <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             </form>
           </td>

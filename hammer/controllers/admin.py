@@ -38,7 +38,7 @@ def admin():
             if a.id not in viewed[i.id]:
                 skipped[i.id] = skipped.get(i.id, 0) + 1
     # settings
-    setting_closed = Setting.value_of(SETTING_CLOSED) == SETTING_TRUE
+    setting_wave = Setting.value_of(SETTING_WAVE)
     return render_template(
         'admin.html',
         annotators=annotators,
@@ -47,7 +47,7 @@ def admin():
         skipped=skipped,
         items=items,
         votes=len(decisions),
-        setting_closed=setting_closed,
+        setting_wave=setting_wave,
     )
 
 @app.route('/admin/item', methods=['POST'])
@@ -59,8 +59,8 @@ def item():
         if data:
             # validate data
             for index, row in enumerate(data):
-                if len(row) != 3:
-                    return utils.user_error('Bad data: row %d has %d elements (expecting 3)' % (index + 1, len(row)))
+                if len(row) != 4:
+                    return utils.user_error('Bad data: row %d has %d elements (expecting 4)' % (index + 1, len(row)))
             def tx():
                 for row in data:
                     _item = Item(*row)
@@ -146,8 +146,8 @@ def annotator():
         if data:
             # validate data
             for index, row in enumerate(data):
-                if len(row) != 3:
-                    return utils.user_error('Bad data: row %d has %d elements (expecting 3)' % (index + 1, len(row)))
+                if len(row) != 4:
+                    return utils.user_error('Bad data: row %d has %d elements (expecting 4)' % (index + 1, len(row)))
             def tx():
                 for row in data:
                     annotator = Annotator(*row)
@@ -191,10 +191,10 @@ def annotator():
 @utils.requires_auth
 def setting():
     key = request.form['key']
-    if key == 'closed':
-        action = request.form['action']
-        new_value = SETTING_TRUE if action == 'Close' else SETTING_FALSE
-        Setting.set(SETTING_CLOSED, new_value)
+    if key == 'wave':
+        new_value = request.form['value']
+        print(new_value)
+        Setting.set(SETTING_WAVE, new_value)
         db.session.commit()
     return redirect(url_for('admin'))
 
