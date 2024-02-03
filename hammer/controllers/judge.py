@@ -20,7 +20,7 @@ def requires_open(redirect_to):
         @wraps(f)
         def decorated(*args, **kwargs):
             annotator = get_current_annotator()
-            if Setting.value_of(SETTING_WAVE) != annotator.wave:
+            if Setting.value_of(SETTING_WAVE) == annotator.wave or Setting.value_of(SETTING_WAVE) == 0:
                 return redirect(url_for(redirect_to))
             else:
                 return f(*args, **kwargs)
@@ -49,7 +49,7 @@ def index():
             content=utils.render_markdown(settings.LOGGED_OUT_MESSAGE)
         )
     else:
-        if Setting.value_of(SETTING_WAVE) != annotator.wave:
+        if Setting.value_of(SETTING_WAVE) == annotator.wave or Setting.value_of(SETTING_WAVE) == 0:
             return render_template(
                 'closed.html',
                 content=utils.render_markdown(settings.CLOSED_MESSAGE)
