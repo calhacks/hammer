@@ -1,7 +1,7 @@
-# Copyright (c) Anish Athalye (me@anishathalye.com)
+# Forked from Gavel by HackMIT / Anish Athalye (me@anishathalye.com)
 #
-# This software is released under AGPLv3. See the included LICENSE.txt for
-# details.
+# This software and Gavel are both released under AGPLv3. 
+# See the included LICENSE.txt for details.
 
 from flask import Flask
 app = Flask(__name__)
