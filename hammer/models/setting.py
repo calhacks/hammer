@@ -21,7 +21,7 @@ class Setting(db.Model):
     def value_of(cls, key):
         setting = cls.by_key(key)
         if setting:
-            return setting.value
+            return int(setting.value)
         else:
             return None
 

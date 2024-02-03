@@ -168,10 +168,10 @@ def preferred_items(annotator):
 
     if ignored_ids:
         available_items = Item.query.filter(
-            (Item.active == True) & (~Item.id.in_(ignored_ids))
+            (Item.active == True) & (Item.wave == Setting.value_of(SETTING_WAVE)) & (~Item.id.in_(ignored_ids))
         ).all()
     else:
-        available_items = Item.query.filter(Item.active == True).all()
+        available_items = Item.query.filter((Item.active == True) & (Item.wave == Setting.value_of(SETTING_WAVE))).all()
 
     prioritized_items = [i for i in available_items if i.prioritized]
 

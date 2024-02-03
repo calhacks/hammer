@@ -193,8 +193,7 @@ def setting():
     key = request.form['key']
     if key == 'wave':
         new_value = request.form['value']
-        print(new_value)
-        Setting.set(SETTING_WAVE, new_value)
+        Setting.set(SETTING_WAVE, int(new_value))
         db.session.commit()
     return redirect(url_for('admin'))
 

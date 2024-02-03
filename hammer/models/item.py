@@ -23,7 +23,7 @@ class Item(db.Model):
     def __init__(self, name, wave, location, description):
         self.name = name
         self.location = location
-        self.wave = wave
+        self.wave = int(wave)
         self.description = description
         self.mu = crowd_bt.MU_PRIOR
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR

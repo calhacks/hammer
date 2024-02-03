@@ -32,7 +32,7 @@ class Annotator(db.Model):
         self.name = name
         self.email = email
         self.description = description
-        self.wave = wave
+        self.wave = int(wave)
         self.alpha = crowd_bt.ALPHA_PRIOR
         self.beta = crowd_bt.BETA_PRIOR
         self.secret = utils.gen_secret(32)
