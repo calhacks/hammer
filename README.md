@@ -6,6 +6,8 @@ If you're interested in using this at your event, please contact [`sampoder@calh
 
 We recommend referring to [Gavel's documentation](https://github.com/anishathalye/gavel/blob/master/README.md) for deployment and usage instructions.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/calhacks/hammer/tree/master)
+
 ## License
 
 Released under AGPLv3. See [LICENSE.txt](LICENSE.txt) for details.
