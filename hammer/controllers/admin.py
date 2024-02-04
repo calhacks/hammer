@@ -18,7 +18,6 @@ ALLOWED_EXTENSIONS = set(['csv', 'xlsx', 'xls'])
 @app.route('/admin/')
 @utils.requires_auth
 def admin():
-    stats.check_send_telemetry()
     annotators = Annotator.query.order_by(Annotator.id).all()
     items = Item.query.order_by(Item.id).all()
     decisions = Decision.query.all()

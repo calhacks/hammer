@@ -1,19 +1,19 @@
 $branding-orange: #ffbc29;
-$branding-turquoise: #4ecdc4;
-$branding-red: #fc5454;
-$branding-yellow: #ffe86b;
+$branding-turquoise: hsl(176, 56%, 55%);
+$branding-red: #de5d5d;
+$branding-yellow: #ffcc4a;
 $branding-grey: #cccccc;
-$branding-green: #c9d41b;
-$branding-blue: #57b6ff;
-$branding-dark: #0b3b4b;
+$branding-green: #82c514;
+$branding-blue: #c0d5fd;
+$branding-dark: #3d68bb;
 
 $wait-color: $branding-yellow;
 $error-color: $branding-red;
 $previous-color: $branding-orange;
-$current-color: $branding-turquoise;
+$current-color: $branding-dark;
 $vote-color: $branding-red;
 $vote-skip-color: $branding-red;
-$vote-submit-color: $branding-blue;
+$vote-submit-color: $branding-green;
 $admin-color: $branding-dark;
 $disabled-color: mix($branding-red, white, 25%);
 $prioritized-color: mix($branding-green, white, 25%);
@@ -22,9 +22,45 @@ $negative-color: $branding-red;
 $neutral-color: $branding-yellow;
 
 $text-color: #000000;
-$link-color: mix($branding-turquoise, black, 50%);
+$link-color: $branding-dark;
 $light: #fffefa;
 $light-grey: #e8e8e8;
 $dark: $branding-dark;
-$heading-font: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$body-font: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$heading-font: "Apercu Pro",system-ui,sans-serif;
+$body-font: "Apercu Pro",system-ui,sans-serif;
+
+@font-face {
+    font-family:Apercu Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_bold.otf);
+    font-weight:700
+  }
+  @font-face {
+    font-family:Apercu Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_medium.otf);
+    font-weight:500
+  }
+  @font-face {
+    font-family:Apercu Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_regular.otf);
+    font-weight:400
+  }
+  @font-face {
+    font-family:Apercu Mono Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_mono_bold.ttf);
+    font-weight:700
+  }
+  @font-face {
+    font-family:Apercu Mono Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_mono_medium.ttf);
+    font-weight:500
+  }
+  @font-face {
+    font-family:Apercu Mono Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_mono_regular.ttf);
+    font-weight:400
+  }
+  @font-face {
+    font-family:Apercu Mono Pro;
+    src:url(https://hackforimpact.calblueprint.org/fonts/apercupro_mono_light.ttf);
+    font-weight:300
+  }

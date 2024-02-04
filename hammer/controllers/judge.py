@@ -20,7 +20,7 @@ def requires_open(redirect_to):
         @wraps(f)
         def decorated(*args, **kwargs):
             annotator = get_current_annotator()
-            if Setting.value_of(SETTING_WAVE) == annotator.wave or Setting.value_of(SETTING_WAVE) == 0:
+            if Setting.value_of(SETTING_WAVE) != annotator.wave or Setting.value_of(SETTING_WAVE) == 0:
                 return redirect(url_for(redirect_to))
             else:
                 return f(*args, **kwargs)
@@ -49,10 +49,16 @@ def index():
             content=utils.render_markdown(settings.LOGGED_OUT_MESSAGE)
         )
     else:
-        if Setting.value_of(SETTING_WAVE) == annotator.wave or Setting.value_of(SETTING_WAVE) == 0:
+        if Setting.value_of(SETTING_WAVE) == 0:
             return render_template(
                 'closed.html',
                 content=utils.render_markdown(settings.CLOSED_MESSAGE)
+            )
+        if Setting.value_of(SETTING_WAVE) != annotator.wave:
+            return render_template(
+                'presenting.html',
+                content=utils.render_markdown(settings.PRESENTING_MESSAGE or constants.DEFAULT_PRESENTING_MESSAGE),
+                annotator=get_current_annotator()
             )
         if not annotator.active:
             return render_template(
@@ -138,7 +144,8 @@ def login(secret):
 def welcome():
     return render_template(
         'welcome.html',
-        content=utils.render_markdown(settings.WELCOME_MESSAGE)
+        content=utils.render_markdown(settings.WELCOME_MESSAGE),
+        annotator=get_current_annotator()
     )
 
 @app.route('/welcome/done', methods=['POST'])
@@ -168,10 +175,10 @@ def preferred_items(annotator):
 
     if ignored_ids:
         available_items = Item.query.filter(
-            (Item.active == True) & (Item.wave == Setting.value_of(SETTING_WAVE)) & (~Item.id.in_(ignored_ids))
+            (Item.active == True) & (Item.wave != Setting.value_of(SETTING_WAVE)) & (~Item.id.in_(ignored_ids))
         ).all()
     else:
-        available_items = Item.query.filter((Item.active == True) & (Item.wave == Setting.value_of(SETTING_WAVE))).all()
+        available_items = Item.query.filter((Item.active == True) & (Item.wave != Setting.value_of(SETTING_WAVE))).all()
 
     prioritized_items = [i for i in available_items if i.prioritized]
 
