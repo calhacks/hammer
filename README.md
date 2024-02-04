@@ -1,5 +1,7 @@
 # 🧑‍⚖️ `hammer`
 
+<img src="screenshots/judge.png" height="250px"> <img src="screenshots/welcome.png" height="250px"> <img src="screenshots/presenting.png" height="250px">
+
 Peer-to-peer pairwise judging, forked from HackMIT's [Gavel](https://github.com/anishathalye/gavel).
 
 If you're interested in using this at your event, please contact [`sampoder@calhacks.io`](mailto:sampoder@calhacks.io). General development instructions can be found in [DEVELOPMENT.md](/DEVELOPMENT.md).
