@@ -3,7 +3,6 @@ from hammer.models import *
 from hammer.constants import *
 import hammer.settings as settings
 import hammer.utils as utils
-import hammer.stats as stats
 from flask import (
     redirect,
     render_template,
